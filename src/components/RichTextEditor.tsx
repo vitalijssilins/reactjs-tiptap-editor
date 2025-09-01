@@ -71,10 +71,16 @@ export interface RichTextEditorProps {
 
   /** This option gives us the control to enable the default behavior of rendering the editor immediately.*/
   immediatelyRender?: boolean
+  
+  /** Render toolbar outside of the editor container */
+  renderToolbar?: (toolbar: React.ReactNode) => React.ReactNode
+  
+  /** Additional content to render above the editor (e.g., title and emoji) */
+  renderHeader?: () => React.ReactNode
 }
 
 function RichTextEditor(props: RichTextEditorProps, ref: React.ForwardedRef<{ editor: CoreEditor | null }>) {
-  const { content, extensions, useEditorOptions = {} } = props;
+  const { content, extensions, useEditorOptions = {}, renderToolbar, renderHeader } = props;
 
   const id = useId();
 
@@ -175,39 +181,69 @@ function RichTextEditor(props: RichTextEditorProps, ref: React.ForwardedRef<{ ed
     return <></>;
   }
 
+  const toolbarComponent = !props?.hideToolbar && (
+    <Toolbar 
+      disabled={!!props?.disabled}
+      editor={editor}
+      toolbar={props.toolbar}
+    />
+  );
+
+  const editorContent = (
+    <>
+      {renderHeader && renderHeader()}
+      <EditorContent 
+        className={`richtext-relative ${props?.contentClass || ''}`}
+        editor={editor}
+      />
+      {hasExtensionValue && (
+        <CharactorCount 
+          editor={editor}
+          extensions={extensions}
+        />
+      )}
+      {!props?.hideBubble && (
+        <BubbleMenu 
+          bubbleMenu={props?.bubbleMenu}
+          disabled={props?.disabled}
+          editor={editor}
+        />
+      )}
+    </>
+  );
+
+  // If renderToolbar is provided, use custom rendering
+  if (renderToolbar && toolbarComponent) {
+    return (
+      <div className="reactjs-tiptap-editor">
+        <ProviderRichText id={id}>
+          <TooltipProvider delayDuration={0} disableHoverableContent>
+            {renderToolbar(toolbarComponent)}
+            <div className="richtext-overflow-hidden richtext-rounded-[0.5rem] richtext-bg-background richtext-shadow richtext-outline richtext-outline-1">
+              <div className="richtext-flex richtext-max-h-full richtext-w-full richtext-flex-col">
+                {editorContent}
+              </div>
+            </div>
+          </TooltipProvider>
+        </ProviderRichText>
+        <Toaster />
+      </div>
+    );
+  }
+
+  // Default rendering (existing behavior)
   return (
     <div className="reactjs-tiptap-editor">
-      <ProviderRichText
-        id={id}
-      >
-        <TooltipProvider delayDuration={0}
-          disableHoverableContent
-        >
+      <ProviderRichText id={id}>
+        <TooltipProvider delayDuration={0} disableHoverableContent>
           <div className="richtext-overflow-hidden richtext-rounded-[0.5rem] richtext-bg-background richtext-shadow richtext-outline richtext-outline-1">
             <div className="richtext-flex richtext-max-h-full richtext-w-full richtext-flex-col">
-              {!props?.hideToolbar && <Toolbar disabled={!!props?.disabled}
-                editor={editor}
-                toolbar={props.toolbar}
-              />}
-
-              <EditorContent className={`richtext-relative ${props?.contentClass || ''}`}
-                editor={editor}
-
-              />
-
-              {hasExtensionValue && <CharactorCount editor={editor}
-                extensions={extensions}
-              />}
-
-              {!props?.hideBubble && <BubbleMenu bubbleMenu={props?.bubbleMenu}
-                disabled={props?.disabled}
-                editor={editor}
-              />}
+              {toolbarComponent}
+              {editorContent}
             </div>
           </div>
         </TooltipProvider>
       </ProviderRichText>
-
       <Toaster />
     </div>
   );
