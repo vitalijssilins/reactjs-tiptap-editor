@@ -23,7 +23,7 @@ function BubbleMenuLink({ editor, disabled }: BubbleMenuLinkProps) {
   const link = useMemo(() => {
     const { href: link } = editor.getAttributes('link');
     return link as string;
-  }, [editor]);
+  }, [editor.state.selection, editor.state.doc]);
 
   const shouldShow = useCallback(({ editor }: { editor: Editor }) => {
     const isActive = editor.isActive('link');

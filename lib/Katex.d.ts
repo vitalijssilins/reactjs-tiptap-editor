@@ -25,8 +25,30 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
+        drawer: {
+            setDrawer: (options: any, replace?: any) => ReturnType;
+            setAlignImageDrawer: (align: 'left' | 'center' | 'right') => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
         setCodeBlock: {
             setCodeBlock: (options?: any) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        codeView: {
+            /**
+                   * Toggle code view mode
+                   */
+            toggleCodeView: () => ReturnType;
         };
     }
 }
@@ -48,6 +70,15 @@ declare module '@tiptap/core' {
     interface Commands<ReturnType> {
         excalidraw: {
             setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        exportWord: {
+            exportToWord: () => ReturnType;
         };
     }
 }
@@ -82,9 +113,19 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        drawer: {
-            setDrawer: (options: any, replace?: any) => ReturnType;
-            setAlignImageDrawer: (align: 'left' | 'center' | 'right') => ReturnType;
+        imageGifUpload: {
+            /**
+             * Add an image gif
+             */
+            setImageGif: (options: Partial<SetImageAttrsOptions>) => ReturnType;
+            /**
+             * Update an image gif
+             */
+            updateImageGif: (options: Partial<SetImageAttrsOptions>) => ReturnType;
+            /**
+             * Set image alignment
+             */
+            setAlignImageGif: (align: 'left' | 'center' | 'right') => ReturnType;
         };
     }
 }
@@ -112,27 +153,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        codeView: {
-            /**
-                   * Toggle code view mode
-                   */
-            toggleCodeView: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        exportWord: {
-            exportToWord: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         indent: {
             /**
              * Set the indent attribute
@@ -142,16 +162,6 @@ declare module '@tiptap/core' {
              * Set the outdent attribute
              */
             outdent: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        lineHeight: {
-            setLineHeight: (lineHeight: string) => ReturnType;
-            unsetLineHeight: () => ReturnType;
         };
     }
 }
@@ -174,41 +184,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        imageGifUpload: {
-            /**
-             * Add an image gif
-             */
-            setImageGif: (options: Partial<SetImageAttrsOptions>) => ReturnType;
-            /**
-             * Update an image gif
-             */
-            updateImageGif: (options: Partial<SetImageAttrsOptions>) => ReturnType;
-            /**
-             * Set image alignment
-             */
-            setAlignImageGif: (align: 'left' | 'center' | 'right') => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        search: {
-            setSearchTerm: (searchTerm: string) => ReturnType;
-            setReplaceTerm: (replaceTerm: string) => ReturnType;
-            replace: () => ReturnType;
-            replaceAll: () => ReturnType;
-            goToPrevSearchResult: () => void;
-            goToNextSearchResult: () => void;
-            setCaseSensitive: (caseSensitive: boolean) => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         katex: {
             setKatex: (arg?: IKatexAttrs) => ReturnType;
         };
@@ -218,9 +193,9 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        tableOfContents: {
-            setTableOfContents: () => ReturnType;
-            removeTableOfContents: () => ReturnType;
+        lineHeight: {
+            setLineHeight: (lineHeight: string) => ReturnType;
+            unsetLineHeight: () => ReturnType;
         };
     }
 }
@@ -252,15 +227,24 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        video: {
-            /**
-             * Add an video
-             */
-            setVideo: (options: Partial<SetVideoOptions>) => ReturnType;
-            /**
-             * Update an video
-             */
-            updateVideo: (options: Partial<SetVideoOptions>) => ReturnType;
+        search: {
+            setSearchTerm: (searchTerm: string) => ReturnType;
+            setReplaceTerm: (replaceTerm: string) => ReturnType;
+            replace: () => ReturnType;
+            replaceAll: () => ReturnType;
+            goToPrevSearchResult: () => void;
+            goToNextSearchResult: () => void;
+            setCaseSensitive: (caseSensitive: boolean) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        tableOfContents: {
+            setTableOfContents: () => ReturnType;
+            removeTableOfContents: () => ReturnType;
         };
     }
 }
@@ -276,6 +260,22 @@ declare module '@tiptap/core' {
              */
             setTweet: (options: SetTweetOptions) => ReturnType;
             updateTweet: (options: SetTweetOptions) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        video: {
+            /**
+             * Add an video
+             */
+            setVideo: (options: Partial<SetVideoOptions>) => ReturnType;
+            /**
+             * Update an video
+             */
+            updateVideo: (options: Partial<SetVideoOptions>) => ReturnType;
         };
     }
 }
