@@ -3,8 +3,8 @@ import { useCallback, useMemo, useState } from 'react';
 import type { Editor } from '@tiptap/react';
 import { BubbleMenu } from '@tiptap/react';
 
-import LinkEditBlock from '@/extensions/Link/components/LinkEditBlock';
-import LinkViewBlock from '@/extensions/Link/components/LinkViewBlock';
+import DefaultLinkEditBlock from '@/extensions/Link/components/LinkEditBlock';
+import DefaultLinkViewBlock from '@/extensions/Link/components/LinkViewBlock';
 
 export interface BubbleMenuLinkProps {
   editor: Editor;
@@ -12,6 +12,12 @@ export interface BubbleMenuLinkProps {
 }
 
 function BubbleMenuLink({ editor, disabled }: BubbleMenuLinkProps) {
+  // Check if the Link extension has custom bubble menu components
+  const linkExtension = editor.extensionManager.extensions.find(ext => ext.name === 'link');
+  const customComponents = linkExtension?.options?.bubbleMenuComponents;
+  
+  const LinkEditBlock = customComponents?.LinkEditBlock || DefaultLinkEditBlock;
+  const LinkViewBlock = customComponents?.LinkViewBlock || DefaultLinkViewBlock;
   const [showEdit, setShowEdit] = useState(false);
 
   const link = useMemo(() => {

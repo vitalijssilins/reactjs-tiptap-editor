@@ -133,9 +133,11 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        drawer: {
-            setDrawer: (options: any, replace?: any) => ReturnType;
-            setAlignImageDrawer: (align: 'left' | 'center' | 'right') => ReturnType;
+        emoji: {
+            setEmoji: (emoji: {
+                name: string;
+                emoji: string;
+            }) => ReturnType;
         };
     }
 }
@@ -143,8 +145,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        exportWord: {
-            exportToWord: () => ReturnType;
+        excalidraw: {
+            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
         };
     }
 }
@@ -170,11 +172,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        emoji: {
-            setEmoji: (emoji: {
-                name: string;
-                emoji: string;
-            }) => ReturnType;
+        painter: {
+            setPainter: (marks: Mark[]) => ReturnType;
         };
     }
 }
@@ -182,8 +181,76 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        painter: {
-            setPainter: (marks: Mark[]) => ReturnType;
+        drawer: {
+            setDrawer: (options: any, replace?: any) => ReturnType;
+            setAlignImageDrawer: (align: 'left' | 'center' | 'right') => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        imageUpload: {
+            /**
+             * Add an image
+             */
+            setImageInline: (options: Partial<SetImageAttrsOptions>) => ReturnType;
+            /**
+             * Update an image
+             */
+            updateImage: (options: Partial<SetImageAttrsOptions>) => ReturnType;
+            /**
+             * Set image alignment
+             */
+            setAlignImage: (align: 'left' | 'center' | 'right') => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        codeView: {
+            /**
+                   * Toggle code view mode
+                   */
+            toggleCodeView: () => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        exportWord: {
+            exportToWord: () => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        indent: {
+            /**
+             * Set the indent attribute
+             */
+            indent: () => ReturnType;
+            /**
+             * Set the outdent attribute
+             */
+            outdent: () => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        lineHeight: {
+            setLineHeight: (lineHeight: string) => ReturnType;
+            unsetLineHeight: () => ReturnType;
         };
     }
 }
@@ -226,27 +293,14 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        indent: {
-            /**
-             * Set the indent attribute
-             */
-            indent: () => ReturnType;
-            /**
-             * Set the outdent attribute
-             */
-            outdent: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        codeView: {
-            /**
-                   * Toggle code view mode
-                   */
-            toggleCodeView: () => ReturnType;
+        search: {
+            setSearchTerm: (searchTerm: string) => ReturnType;
+            setReplaceTerm: (replaceTerm: string) => ReturnType;
+            replace: () => ReturnType;
+            replaceAll: () => ReturnType;
+            goToPrevSearchResult: () => void;
+            goToNextSearchResult: () => void;
+            setCaseSensitive: (caseSensitive: boolean) => ReturnType;
         };
     }
 }
@@ -263,29 +317,9 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        lineHeight: {
-            setLineHeight: (lineHeight: string) => ReturnType;
-            unsetLineHeight: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        imageUpload: {
-            /**
-             * Add an image
-             */
-            setImageInline: (options: Partial<SetImageAttrsOptions>) => ReturnType;
-            /**
-             * Update an image
-             */
-            updateImage: (options: Partial<SetImageAttrsOptions>) => ReturnType;
-            /**
-             * Set image alignment
-             */
-            setAlignImage: (align: 'left' | 'center' | 'right') => ReturnType;
+        tableOfContents: {
+            setTableOfContents: () => ReturnType;
+            removeTableOfContents: () => ReturnType;
         };
     }
 }
@@ -296,21 +330,6 @@ declare module '@tiptap/core' {
         mermaid: {
             setMermaid: (options: any, replace?: any) => ReturnType;
             setAlignImageMermaid: (align: 'left' | 'center' | 'right') => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        search: {
-            setSearchTerm: (searchTerm: string) => ReturnType;
-            setReplaceTerm: (replaceTerm: string) => ReturnType;
-            replace: () => ReturnType;
-            replaceAll: () => ReturnType;
-            goToPrevSearchResult: () => void;
-            goToNextSearchResult: () => void;
-            setCaseSensitive: (caseSensitive: boolean) => ReturnType;
         };
     }
 }
@@ -332,9 +351,15 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        tableOfContents: {
-            setTableOfContents: () => ReturnType;
-            removeTableOfContents: () => ReturnType;
+        video: {
+            /**
+             * Add an video
+             */
+            setVideo: (options: Partial<SetVideoOptions>) => ReturnType;
+            /**
+             * Update an video
+             */
+            updateVideo: (options: Partial<SetVideoOptions>) => ReturnType;
         };
     }
 }
@@ -350,31 +375,6 @@ declare module '@tiptap/core' {
              */
             setTweet: (options: SetTweetOptions) => ReturnType;
             updateTweet: (options: SetTweetOptions) => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        excalidraw: {
-            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        video: {
-            /**
-             * Add an video
-             */
-            setVideo: (options: Partial<SetVideoOptions>) => ReturnType;
-            /**
-             * Update an video
-             */
-            updateVideo: (options: Partial<SetVideoOptions>) => ReturnType;
         };
     }
 }

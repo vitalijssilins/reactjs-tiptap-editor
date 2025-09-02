@@ -9,7 +9,12 @@ import type { GeneralOptions } from '@/types';
 
 export interface LinkOptions
   extends TiptapLinkOptions,
-  GeneralOptions<LinkOptions> {}
+  GeneralOptions<LinkOptions> {
+  bubbleMenuComponents?: {
+    LinkEditBlock?: React.ComponentType<any>;
+    LinkViewBlock?: React.ComponentType<any>;
+  };
+}
 
 export const Link = /* @__PURE__ */ TiptapLink.extend<LinkOptions>({
   inclusive: false,
