@@ -58,6 +58,7 @@ export function BubbleMenu({ editor, disabled, bubbleMenu }: BubbleMenuComponent
     !bubbleMenu?.floatingMenuConfig?.hidden ? <ContentMenu disabled={disabled}
       editor={editor}
       key="content"
+      hidePlusIcon={bubbleMenu?.floatingMenuConfig?.hidePlusIcon}
     /> : null,
     !bubbleMenu?.textConfig?.hidden ? <BubbleMenuText disabled={disabled}
       editor={editor}

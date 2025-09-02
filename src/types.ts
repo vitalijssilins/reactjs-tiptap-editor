@@ -155,6 +155,11 @@ export interface BubbleMenuProps {
      * @default false
      */
     hidden?: boolean
+    /**
+     * @description Hide the plus icon in the floating menu
+     * @default false
+     */
+    hidePlusIcon?: boolean
   }
   linkConfig?: {
     /**

@@ -29,6 +29,7 @@ export interface ContentMenuProps {
   disabled?: boolean
   className?: string
   pluginKey?: string
+  hidePlusIcon?: boolean
 }
 
 function ContentMenu(props: ContentMenuProps) {
@@ -191,18 +192,20 @@ function ContentMenu(props: ContentMenuProps) {
       }}
     >
       <div className="richtext-flex richtext-items-center richtext-gap-0.5 richtext-duration-200 richtext-ease-in-out [transition-property:top,_left]">
-        <Button
-          className="!richtext-size-7 richtext-cursor-grab"
-          disabled={props?.disabled}
-          onClick={handleAdd}
-          size="icon"
-          type="button"
-          variant="ghost"
-        >
-          <IconComponent className="richtext-text-lg richtext-text-neutral-600 dark:richtext-text-neutral-200"
-            name="Plus"
-          />
-        </Button>
+        {!props.hidePlusIcon && (
+          <Button
+            className="!richtext-size-7 richtext-cursor-grab"
+            disabled={props?.disabled}
+            onClick={handleAdd}
+            size="icon"
+            type="button"
+            variant="ghost"
+          >
+            <IconComponent className="richtext-text-lg richtext-text-neutral-600 dark:richtext-text-neutral-200"
+              name="Plus"
+            />
+          </Button>
+        )}
 
         <DropdownMenu onOpenChange={handleMenuOpenChange}
           open={menuOpen}
