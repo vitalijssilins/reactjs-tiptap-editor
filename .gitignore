@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 /dist
-/lib
+# /lib - commented out to include built files for GitHub installation
 examples/dist
 
 auto-imports.d.ts
