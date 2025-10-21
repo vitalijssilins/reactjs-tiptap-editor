@@ -14,13 +14,6 @@
     ]
   },
   {
-    "name": "Blockquote.ts",
-    "package": "Blockquote",
-    "alias": [
-      "Blockquote"
-    ]
-  },
-  {
     "name": "Bold.ts",
     "package": "Bold",
     "alias": [
@@ -42,6 +35,20 @@
     ]
   },
   {
+    "name": "Blockquote.ts",
+    "package": "Blockquote",
+    "alias": [
+      "Blockquote"
+    ]
+  },
+  {
+    "name": "CodeBlock.ts",
+    "package": "CodeBlock",
+    "alias": [
+      "CodeBlock"
+    ]
+  },
+  {
     "name": "Code.ts",
     "package": "Code",
     "alias": [
@@ -53,13 +60,6 @@
     "package": "CodeView",
     "alias": [
       "CodeView"
-    ]
-  },
-  {
-    "name": "CodeBlock.ts",
-    "package": "CodeBlock",
-    "alias": [
-      "CodeBlock"
     ]
   },
   {
@@ -154,13 +154,6 @@
     ]
   },
   {
-    "name": "HorizontalRule.ts",
-    "package": "HorizontalRule",
-    "alias": [
-      "HorizontalRule"
-    ]
-  },
-  {
     "name": "Iframe.ts",
     "package": "Iframe",
     "alias": [
@@ -172,6 +165,13 @@
     "package": "Iframe",
     "alias": [
       "embed"
+    ]
+  },
+  {
+    "name": "HorizontalRule.ts",
+    "package": "HorizontalRule",
+    "alias": [
+      "HorizontalRule"
     ]
   },
   {
@@ -245,17 +245,17 @@
     ]
   },
   {
-    "name": "Mermaid.ts",
-    "package": "Mermaid",
-    "alias": [
-      "Mermaid"
-    ]
-  },
-  {
     "name": "Mention.ts",
     "package": "Mention",
     "alias": [
       "Mention"
+    ]
+  },
+  {
+    "name": "Mermaid.ts",
+    "package": "Mermaid",
+    "alias": [
+      "Mermaid"
     ]
   },
   {
@@ -371,13 +371,6 @@
     ]
   },
   {
-    "name": "TextBubble.ts",
-    "package": "TextBubble",
-    "alias": [
-      "TextBubble"
-    ]
-  },
-  {
     "name": "TextDirection.ts",
     "package": "TextDirection",
     "alias": [
@@ -392,10 +385,10 @@
     ]
   },
   {
-    "name": "Twitter.ts",
-    "package": "Twitter",
+    "name": "TextBubble.ts",
+    "package": "TextBubble",
     "alias": [
-      "Twitter"
+      "TextBubble"
     ]
   },
   {
@@ -403,6 +396,13 @@
     "package": "TrailingNode",
     "alias": [
       "TrailingNode"
+    ]
+  },
+  {
+    "name": "Twitter.ts",
+    "package": "Twitter",
+    "alias": [
+      "Twitter"
     ]
   },
   {
