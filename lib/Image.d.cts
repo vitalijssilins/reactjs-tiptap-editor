@@ -169,8 +169,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        exportWord: {
-            exportToWord: () => ReturnType;
+        excalidraw: {
+            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
         };
     }
 }
@@ -178,8 +178,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        excalidraw: {
-            setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
+        exportWord: {
+            exportToWord: () => ReturnType;
         };
     }
 }
@@ -207,6 +207,31 @@ declare module '@tiptap/core' {
              * Unset the font size
              */
             unsetFontSize: () => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        painter: {
+            setPainter: (marks: Mark[]) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        indent: {
+            /**
+             * Set the indent attribute
+             */
+            indent: () => ReturnType;
+            /**
+             * Set the outdent attribute
+             */
+            outdent: () => ReturnType;
         };
     }
 }
@@ -269,15 +294,6 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        painter: {
-            setPainter: (marks: Mark[]) => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
         lineHeight: {
             setLineHeight: (lineHeight: string) => ReturnType;
             unsetLineHeight: () => ReturnType;
@@ -288,15 +304,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        indent: {
-            /**
-             * Set the indent attribute
-             */
-            indent: () => ReturnType;
-            /**
-             * Set the outdent attribute
-             */
-            outdent: () => ReturnType;
+        katex: {
+            setKatex: (arg?: IKatexAttrs) => ReturnType;
         };
     }
 }
@@ -328,8 +337,14 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        katex: {
-            setKatex: (arg?: IKatexAttrs) => ReturnType;
+        search: {
+            setSearchTerm: (searchTerm: string) => ReturnType;
+            setReplaceTerm: (replaceTerm: string) => ReturnType;
+            replace: () => ReturnType;
+            replaceAll: () => ReturnType;
+            goToPrevSearchResult: () => void;
+            goToNextSearchResult: () => void;
+            setCaseSensitive: (caseSensitive: boolean) => ReturnType;
         };
     }
 }
@@ -340,21 +355,6 @@ declare module '@tiptap/core' {
         tableOfContents: {
             setTableOfContents: () => ReturnType;
             removeTableOfContents: () => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        twitter: {
-            /**
-             * Insert a tweet
-             * @param options The tweet attributes
-             * @example editor.commands.setTweet({ src: 'https://x.com/seanpk/status/1800145949580517852' })
-             */
-            setTweet: (options: SetTweetOptions) => ReturnType;
-            updateTweet: (options: SetTweetOptions) => ReturnType;
         };
     }
 }
@@ -378,14 +378,14 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        search: {
-            setSearchTerm: (searchTerm: string) => ReturnType;
-            setReplaceTerm: (replaceTerm: string) => ReturnType;
-            replace: () => ReturnType;
-            replaceAll: () => ReturnType;
-            goToPrevSearchResult: () => void;
-            goToNextSearchResult: () => void;
-            setCaseSensitive: (caseSensitive: boolean) => ReturnType;
+        twitter: {
+            /**
+             * Insert a tweet
+             * @param options The tweet attributes
+             * @example editor.commands.setTweet({ src: 'https://x.com/seanpk/status/1800145949580517852' })
+             */
+            setTweet: (options: SetTweetOptions) => ReturnType;
+            updateTweet: (options: SetTweetOptions) => ReturnType;
         };
     }
 }

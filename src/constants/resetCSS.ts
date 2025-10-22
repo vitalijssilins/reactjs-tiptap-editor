@@ -114,20 +114,14 @@ export const RESET_CSS = `
 
 div[data-radix-popper-content-wrapper],
 div[data-tippy-root] {
-  color: hsl(var(--richtext-foreground));
-
   *,
   ::before,
   ::after {
     box-sizing: border-box;
-    border-width: 0;
-    border-style: solid;
-    border-color: hsl(var(--richtext-border));
   }
 
   button, input {
     cursor: pointer;
-    color: inherit;
   }
 }
 `;
