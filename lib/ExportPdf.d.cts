@@ -58,6 +58,7 @@ export declare const ExportPdf: Extension<ExportPdfOptions, any>;
 
 export declare interface ExportPdfOptions extends GeneralOptions<ExportPdfOptions> {
     paperSize: PaperSize;
+    title?: string;
     margins: {
         top?: PageMargin;
         right?: PageMargin;
@@ -78,6 +79,8 @@ declare interface GeneralOptions<T> {
     button: ButtonView<T>;
     /** Show on Toolbar */
     toolbar?: boolean;
+    /** Shortcut keys override */
+    shortcutKeys?: string[] | string[][];
 }
 
 declare type PageMargin = '0in' | '0.25in' | '0.4in' | '0.5in' | '0.75in' | '1in' | '1.25in' | '1.5in' | '1.75in' | '2in' | '0cm' | '0.5cm' | '1cm' | '1.5cm' | '2cm' | '2.5cm' | '3cm' | '4cm' | '5cm' | '0mm' | '5mm' | '10mm' | '15mm' | '20mm' | '25mm' | '30mm' | '40mm' | '50mm' | '0pt' | '18pt' | '36pt' | '54pt' | '72pt' | '90pt' | '108pt' | '144pt';
@@ -91,16 +94,6 @@ declare module '@tiptap/core' {
     interface Commands<ReturnType> {
         attachment: {
             setAttachment: (attrs?: unknown) => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        drawer: {
-            setDrawer: (options: any, replace?: any) => ReturnType;
-            setAlignImageDrawer: (align: 'left' | 'center' | 'right') => ReturnType;
         };
     }
 }
@@ -129,11 +122,30 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
+        drawer: {
+            setDrawer: (options: any, replace?: any) => ReturnType;
+            setAlignImageDrawer: (align: 'left' | 'center' | 'right') => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
         emoji: {
             setEmoji: (emoji: {
                 name: string;
                 emoji: string;
             }) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        exportWord: {
+            exportToWord: () => ReturnType;
         };
     }
 }
@@ -150,8 +162,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        exportWord: {
-            exportToWord: () => ReturnType;
+        exportPdf: {
+            exportToPdf: () => ReturnType;
         };
     }
 }
@@ -177,28 +189,14 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        painter: {
-            setPainter: (marks: Mark[]) => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        imageGifUpload: {
+        iframe: {
             /**
-             * Add an image gif
+             * Add an iframe
              */
-            setImageGif: (options: Partial<SetImageAttrsOptions>) => ReturnType;
-            /**
-             * Update an image gif
-             */
-            updateImageGif: (options: Partial<SetImageAttrsOptions>) => ReturnType;
-            /**
-             * Set image alignment
-             */
-            setAlignImageGif: (align: 'left' | 'center' | 'right') => ReturnType;
+            setIframe: (options: {
+                src: string;
+                service: string;
+            }) => ReturnType;
         };
     }
 }
@@ -226,15 +224,19 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        indent: {
+        imageGifUpload: {
             /**
-             * Set the indent attribute
+             * Add an image gif
              */
-            indent: () => ReturnType;
+            setImageGif: (options: Partial<SetImageAttrsOptions>) => ReturnType;
             /**
-             * Set the outdent attribute
+             * Update an image gif
              */
-            outdent: () => ReturnType;
+            updateImageGif: (options: Partial<SetImageAttrsOptions>) => ReturnType;
+            /**
+             * Set image alignment
+             */
+            setAlignImageGif: (align: 'left' | 'center' | 'right') => ReturnType;
         };
     }
 }
@@ -242,23 +244,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        iframe: {
-            /**
-             * Add an iframe
-             */
-            setIframe: (options: {
-                src: string;
-                service: string;
-            }) => ReturnType;
-        };
-    }
-}
-
-
-declare module '@tiptap/core' {
-    interface Commands<ReturnType> {
-        katex: {
-            setKatex: (arg?: IKatexAttrs) => ReturnType;
+        painter: {
+            setPainter: (marks: Mark[]) => ReturnType;
         };
     }
 }
@@ -269,6 +256,22 @@ declare module '@tiptap/core' {
         lineHeight: {
             setLineHeight: (lineHeight: string) => ReturnType;
             unsetLineHeight: () => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        indent: {
+            /**
+             * Set the indent attribute
+             */
+            indent: () => ReturnType;
+            /**
+             * Set the outdent attribute
+             */
+            outdent: () => ReturnType;
         };
     }
 }
@@ -300,14 +303,8 @@ declare module '@tiptap/core' {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        search: {
-            setSearchTerm: (searchTerm: string) => ReturnType;
-            setReplaceTerm: (replaceTerm: string) => ReturnType;
-            replace: () => ReturnType;
-            replaceAll: () => ReturnType;
-            goToPrevSearchResult: () => void;
-            goToNextSearchResult: () => void;
-            setCaseSensitive: (caseSensitive: boolean) => ReturnType;
+        katex: {
+            setKatex: (arg?: IKatexAttrs) => ReturnType;
         };
     }
 }
@@ -349,6 +346,21 @@ declare module '@tiptap/core' {
              * Update an video
              */
             updateVideo: (options: Partial<SetVideoOptions>) => ReturnType;
+        };
+    }
+}
+
+
+declare module '@tiptap/core' {
+    interface Commands<ReturnType> {
+        search: {
+            setSearchTerm: (searchTerm: string) => ReturnType;
+            setReplaceTerm: (replaceTerm: string) => ReturnType;
+            replace: () => ReturnType;
+            replaceAll: () => ReturnType;
+            goToPrevSearchResult: () => void;
+            goToNextSearchResult: () => void;
+            setCaseSensitive: (caseSensitive: boolean) => ReturnType;
         };
     }
 }
